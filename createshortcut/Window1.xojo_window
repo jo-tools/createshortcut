@@ -40,7 +40,7 @@ Begin Window Window1
       InitialParent   =   ""
       Left            =   20
       LockBottom      =   False
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
@@ -67,7 +67,7 @@ Begin Window Window1
       Italic          =   False
       Left            =   101
       LockBottom      =   False
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   True
       LockTop         =   True
@@ -102,7 +102,7 @@ Begin Window Window1
       Italic          =   False
       Left            =   371
       LockBottom      =   False
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   False
       LockRight       =   True
       LockTop         =   True
@@ -137,7 +137,7 @@ Begin Window Window1
       Italic          =   False
       Left            =   101
       LockBottom      =   False
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   True
       LockTop         =   True
@@ -172,7 +172,7 @@ Begin Window Window1
       Italic          =   False
       Left            =   394
       LockBottom      =   False
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   False
       LockRight       =   True
       LockTop         =   True
@@ -208,7 +208,7 @@ Begin Window Window1
       InitialParent   =   ""
       Left            =   474
       LockBottom      =   False
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   False
       LockRight       =   True
       LockTop         =   True
@@ -231,7 +231,7 @@ Begin Window Window1
       InitialParent   =   ""
       Left            =   0
       LockBottom      =   False
-      LockedInPosition=   False
+      LockedInPosition=   True
       LockLeft        =   True
       LockRight       =   True
       LockTop         =   True
