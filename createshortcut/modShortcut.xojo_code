@@ -1,48 +1,49 @@
 #tag Module
 Protected Module modShortcut
-	#tag Method, Flags = &h0
-		Function CreateShortcut(Extends poOrigin As FolderItem, poShortcutInFolder As FolderItem, psShortcutCaption As String, poLinuxIconFile As FolderItem) As Boolean
+	#tag Method, Flags = &h0, CompatibilityFlags = (TargetDesktop and (Target32Bit or Target64Bit))
+		Function CreateShortcut(Extends poOrigin As FolderItem, poShortcutFile As FolderItem, poLinuxIconFile As FolderItem = nil) As Boolean
 		  Try
 		    'Check Origin
 		    If (poOrigin = Nil) Then Return False
 		    If (poOrigin.Exists = False) Then Return False
 		    
-		    'Check Destination Folder
-		    If (poShortcutInFolder = Nil) Then Return False
-		    If (poShortcutInFolder.Exists = False) Then Return False
-		    If (poShortcutInFolder.Directory = False) Then Return False
+		    'Check Shortcut File
+		    If (poShortcutFile = Nil) Or (poShortcutFile.Parent = Nil) Then Return False
+		    Dim oShortcutInFolder As FolderItem = poShortcutFile.Parent
+		    If (Not oShortcutInFolder.Exists) Or (Not oShortcutInFolder.Directory) Then Return False
 		    
-		    'Check Shortcut Caption
-		    If (psShortcutCaption = "") Then psShortcutCaption = poOrigin.DisplayName
-		    If (psShortcutCaption = "") Then Return False
+		    'Check Shortcut Filename
+		    Dim sShortcutFilename As String = poShortcutFile.Name
+		    If (sShortcutFilename = "") Then sShortcutFilename = poOrigin.DisplayName
+		    If (sShortcutFilename = "") Then Return False
 		    
-		    Dim sShortcutFilename As String = psShortcutCaption
 		    #If TargetWindows Then
-		      sShortcutFilename = sShortcutFilename + ".lnk"
-		    #elseif TargetLinux then
-		      sShortcutFilename = sShortcutFilename + ".desktop"
+		      If (NthField(sShortcutFilename, ".", CountFields(sShortcutFilename, ".")) <> "lnk") Then
+		        Break 'Expected a File with Extension .lnk
+		        Return False
+		      End If
+		    #ElseIf TargetLinux Then
+		      If (NthField(sShortcutFilename, ".", CountFields(sShortcutFilename, ".")) <> "desktop") Then
+		        Break 'Expected a File with Extension .desktop
+		        Return False
+		      End If
 		    #EndIf
-		    sShortcutFilename = ReplaceAll(sShortcutFilename, "\", "")
-		    sShortcutFilename = ReplaceAll(sShortcutFilename, "/", "")
-		    sShortcutFilename = ReplaceAll(sShortcutFilename, ":", "")
 		    
-		    'FolderItem for Shortcut (.TrueChild to get the Alias/Shortcut itself!)
-		    Dim oShortcutFile As FolderItem = poShortcutInFolder.TrueChild(sShortcutFilename)
-		    If (oShortcutFile = Nil) Then Return False
-		    If oShortcutFile.Exists Then oShortcutFile.Delete
-		    
+		    'Note: The Shortcut File gets overwritten if it already exist
 		    
 		    #If TargetWindows Then
-		      #pragma unused poLinuxIconFile
+		      #Pragma unused poLinuxIconFile
 		      
 		      Try
+		        //https://docs.microsoft.com/en-us/troubleshoot/windows-client/admin-development/create-desktop-shortcut-with-wsh
+		        //Windows Script Host Shell Object
 		        Dim oOLEObject As New OLEObject("{F935DC22-1CF0-11D0-ADB9-00C04FD58A0B}")
 		        If (oOLEObject = Nil) Then Return False
 		        
-		        Dim oOLEShortcutObject As OLEObject = oOLEObject.CreateShortcut(oShortcutFile.NativePath)
+		        Dim oOLEShortcutObject As OLEObject = oOLEObject.CreateShortcut(poShortcutFile.NativePath)
 		        If (oOLEShortcutObject = Nil) Then Return False
 		        
-		        oOLEShortcutObject.Description = psShortcutCaption
+		        oOLEShortcutObject.Description = sShortcutFilename
 		        oOLEShortcutObject.TargetPath = poOrigin.NativePath
 		        If poOrigin.Directory Then
 		          oOLEShortcutObject.WorkingDirectory = poOrigin.NativePath
@@ -55,7 +56,7 @@ Protected Module modShortcut
 		        End If
 		        oOLEShortcutObject.Save
 		        
-		        Return ((oShortcutFile <> Nil) And oShortcutFile.Exists)
+		        Return ((poShortcutFile <> Nil) And poShortcutFile.Exists)
 		        
 		      Catch errOLE As OLEException
 		        Return False
@@ -63,7 +64,7 @@ Protected Module modShortcut
 		    #EndIf
 		    
 		    #If TargetMacOS Then
-		      #pragma unused poLinuxIconFile
+		      #Pragma unused poLinuxIconFile
 		      
 		      Declare Function NSClassFromString Lib "Cocoa" (className As CFStringRef) As Ptr
 		      Declare Function fileURLWithPath Lib "Foundation" selector "fileURLWithPath:" (ptrNSURLClass As Ptr, path As CFStringRef) As Ptr
@@ -78,7 +79,7 @@ Protected Module modShortcut
 		      Dim ptrAppURL As Ptr = fileURLWithPath(ptrNSURLClass, poOrigin.NativePath)
 		      If (ptrAppURL = Nil) Then Return False
 		      
-		      Dim ptrAliasURL As Ptr = fileURLWithPath(ptrNSURLClass, oShortcutFile.NativePath)
+		      Dim ptrAliasURL As Ptr = fileURLWithPath(ptrNSURLClass, poShortcutFile.NativePath)
 		      If (ptrAliasURL = Nil) Then Return False
 		      
 		      Dim ptrBookmarkData As Ptr = bookmarkDataWithOptions(ptrAppURL, kNSURLBookmarkCreationSuitableForBookmarkFile, Nil, Nil, Nil)
@@ -96,7 +97,7 @@ Protected Module modShortcut
 		      
 		      Dim sContent As String = "[Desktop Entry]" + EndOfLine.UNIX + _
 		      "Encoding=UTF-8" + EndOfLine.UNIX + _
-		      "Name=" + psShortcutCaption + EndOfLine.UNIX + _
+		      "Name=" + sShortcutFilename + EndOfLine.UNIX + _
 		      "Exec=" + sExeFile + EndOfLine.UNIX + _
 		      "Icon=" + sIconFile + EndOfLine.UNIX + _
 		      "Terminal=false" + EndOfLine.UNIX + _
@@ -106,7 +107,11 @@ Protected Module modShortcut
 		      
 		      Dim oStream As TextOutputStream
 		      Try
-		        oStream = TextOutputStream.Create(oShortcutFile)
+		        oStream = TextOutputStream.Create(poShortcutFile)
+		        #If (XojoVersion >= 2019.02) Then
+		          oStream.Encoding = Encodings.UTF8
+		        #EndIf
+		        oStream.Enc
 		      Catch errIO As IOException
 		        Return False
 		      End Try
@@ -116,10 +121,10 @@ Protected Module modShortcut
 		      oStream.Close
 		      
 		      Dim shlHost As New Shell
-		      shlHost.Execute "chmod 755 " + oShortcutFile.ShellPath
+		      shlHost.Execute "chmod 755 " + poShortcutFile.ShellPath
 		      shlHost.Close
 		      
-		      Return ((oShortcutFile <> Nil) And oShortcutFile.Exists)
+		      Return ((poShortcutFile <> Nil) And poShortcutFile.Exists)
 		    #EndIf
 		    
 		    

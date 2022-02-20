@@ -9,7 +9,7 @@ Begin Window Window1
    FullScreen      =   False
    FullScreenButton=   False
    HasBackColor    =   False
-   Height          =   400
+   Height          =   190
    ImplicitInstance=   True
    LiveResize      =   True
    MacProcID       =   0
@@ -18,9 +18,9 @@ Begin Window Window1
    MaxWidth        =   32000
    MenuBar         =   1097017343
    MenuBarVisible  =   True
-   MinHeight       =   64
+   MinHeight       =   190
    MinimizeButton  =   False
-   MinWidth        =   64
+   MinWidth        =   600
    Placement       =   0
    Resizeable      =   False
    Title           =   "#constAppName"
@@ -244,6 +244,73 @@ Begin Window Window1
       Visible         =   True
       Width           =   600
    End
+   Begin PushButton btnCreateShortcut
+      AutoDeactivate  =   True
+      Bold            =   False
+      ButtonStyle     =   "0"
+      Cancel          =   False
+      Caption         =   "Create Shortcut"
+      Default         =   False
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   True
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Scope           =   2
+      TabIndex        =   8
+      TabPanelIndex   =   0
+      TabStop         =   True
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   150
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   180
+   End
+   Begin Label labInfo
+      AutoDeactivate  =   True
+      Bold            =   False
+      DataField       =   ""
+      DataSource      =   ""
+      Enabled         =   True
+      Height          =   20
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   True
+      LockLeft        =   True
+      LockRight       =   True
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   7
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   "This example will simply create a shortcut to this application."
+      TextAlign       =   0
+      TextColor       =   &c00000000
+      TextFont        =   "System"
+      TextSize        =   0.0
+      TextUnit        =   0
+      Top             =   115
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   560
+   End
 End
 #tag EndWindow
 
@@ -256,6 +323,12 @@ End
 
 
 	#tag Constant, Name = constAppName, Type = String, Dynamic = False, Default = \"Create Shortcut", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = constOsCaptionShortcut, Type = String, Dynamic = False, Default = \"Shortcut", Scope = Public
+		#Tag Instance, Platform = Mac OS, Language = Default, Definition  = \"Alias"
+		#Tag Instance, Platform = Windows, Language = Default, Definition  = \"Shortcut"
+		#Tag Instance, Platform = Linux, Language = Default, Definition  = \"Desktop Launch File"
 	#tag EndConstant
 
 	#tag Constant, Name = constWebsiteUrl, Type = String, Dynamic = False, Default = \"https://www.jo-tools.ch/xojo/createshortcut/", Scope = Private
@@ -398,6 +471,105 @@ End
 		Function MouseDown(X As Integer, Y As Integer) As Boolean
 		  Return True
 		End Function
+	#tag EndEvent
+#tag EndEvents
+#tag Events btnCreateShortcut
+	#tag Event
+		Sub Action()
+		  'This example will create a shortcut to this application
+		  'So let's get the FolderItem for the application
+		  
+		  Dim oApp As FolderItem = App.ExecutableFile
+		  #If TargetMacOS Then
+		    'get the main 'Application.app' folder
+		    '/CreateShortcut.app/Contents/MacOS/CreateShortcut
+		    If (oApp <> Nil) And (oApp.Parent <> Nil) And (oApp.Parent.Name = "MacOS") Then
+		      oApp = oApp.Parent
+		      If (oApp <> Nil) And (oApp.Parent <> Nil) And (oApp.Parent.Name = "Contents") Then
+		        oApp = oApp.Parent
+		        If (oApp <> Nil) And (oApp.Parent <> Nil) And oApp.Directory Then
+		          oApp = oApp.Parent
+		        End If
+		      End If
+		    End If
+		  #EndIf
+		  If (oApp = Nil) Or (oApp.Exists = False) Then
+		    MsgBox "Could not get the FolderItem for the Application executable."
+		    Return
+		  End If
+		  
+		  
+		  'Linux: The Desktop Launch Item needs an Icon
+		  '       Xojo adds some appicons next to the executable, so let's get that one
+		  Dim oLinuxIconFile As FolderItem
+		  #If TargetLinux Then
+		    oLinuxIconFile = oApp.Parent
+		    If (oLinuxIconFile <> Nil) And oLinuxIconFile.Directory Then
+		      oLinuxIconFile = oLinuxIconFile.Child("appicon_128.png")
+		    End If
+		    If (oLinuxIconFile = Nil) Or oLinuxIconFile.Directory Or (Not oLinuxIconFile.Exists) Then
+		      MsgBox "Icon file 'appicon_128.png' not found next to the application executable. Let's continue without icon."
+		    End If
+		  #EndIf
+		  
+		  #If DebugBuild Then
+		    MsgBox "Note: This is a Debug Run." + EndOfLine + EndOfLine + "The " + constOsCaptionShortcut + " you're going to create will point to the DebugBuild, which doesn't make much sense."
+		  #EndIf
+		  
+		  
+		  'Ask the user where to save the Shortcut File
+		  Dim dlg As New SaveAsDialog
+		  dlg.InitialDirectory = SpecialFolder.Desktop
+		  dlg.Title = "Create " + constOsCaptionShortcut
+		  dlg.PromptText = "Create " + constOsCaptionShortcut + " for Application '" + constAppName + "'"
+		  
+		  Dim filterFileType As New FileType
+		  filterFileType.Name = constOsCaptionShortcut
+		  
+		  #If TargetWindows Then
+		    filterFileType.Extensions = ".lnk"
+		  #ElseIf TargetMacOS Then
+		    filterFileType.UTI = "com.apple.alias-file"
+		    filterFileType.Extensions = ""
+		    filterFileType.ConformsTo = "public.data, com.apple.resolvable"
+		  #ElseIf TargetLinux Then
+		    filterFileType.Extensions = ".desktop"
+		  #EndIf
+		  
+		  dlg.Filter = filterFileType
+		  dlg.SuggestedFileName = "Launch My App"
+		  Dim fileShortcut As FolderItem = dlg.ShowModal
+		  
+		  If (fileShortcut = Nil) Then
+		    'Dialog Cancelled
+		    Return
+		  End If
+		  
+		  If oApp.CreateShortcut(fileShortcut, oLinuxIconFile) Then
+		    MsgBox constOsCaptionShortcut + " successfully created."
+		  Else
+		    MsgBox "Failed to create " + constOsCaptionShortcut + "."
+		  End If
+		  
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Open()
+		  #If TargetLinux Then
+		    me.Width = 300
+		    Me.Height = 32
+		    Me.Top = Me.Top - 5
+		  #EndIf
+		  
+		  me.Caption = "Create " + constOsCaptionShortcut
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events labInfo
+	#tag Event
+		Sub Open()
+		  me.Text = "This example will simply create a " + constOsCaptionShortcut + " to this application."
+		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
