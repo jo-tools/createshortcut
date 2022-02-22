@@ -13,10 +13,10 @@ Windows: **Shortcut**
 
 macOS: **Alias**  
 ![ScreenShot: macOS Alias](screenshots/macos-alias.png?raw=true)
+-->
 
 Linux: **Desktop Launch Icon**  
 ![ScreenShot: Linux Desktop Launch Icon](screenshots/linux-desktop-launch-icon.png?raw=true)
--->
 
 ## Xojo
 ### Requirements
