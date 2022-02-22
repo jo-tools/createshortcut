@@ -322,6 +322,33 @@ End
 	#tag EndEvent
 
 
+	#tag Method, Flags = &h0
+		Sub Constructor()
+		  Super.Constructor
+		  
+		  
+		  #If TargetLinux And TargetDesktop Then
+		    If (AppIcon_128 = Nil) Then Return
+		    
+		    'set Window Icon
+		    Declare Sub gtk_window_set_icon Lib "libgtk-3" (windowHandle As Integer, icon As Ptr)
+		    Declare Sub g_object_unref Lib "libgtk-3" (Object As Ptr)
+		    
+		    Try
+		      Dim ptrToIcon As Ptr = AppIcon_128.CopyOSHandle(Picture.HandleType.LinuxGdkPixbuf)
+		      If (ptrToIcon <> Nil) Then
+		        gtk_window_set_icon(Self.Handle, ptrToIcon)
+		        g_object_unref(ptrToIcon)
+		      End If
+		    Catch err As RuntimeException
+		      'ignore
+		    End Try
+		    
+		  #EndIf
+		End Sub
+	#tag EndMethod
+
+
 	#tag Constant, Name = constAppName, Type = String, Dynamic = False, Default = \"Create Shortcut", Scope = Private
 	#tag EndConstant
 
@@ -506,6 +533,11 @@ End
 		    oLinuxIconFile = oApp.Parent
 		    If (oLinuxIconFile <> Nil) And oLinuxIconFile.Directory Then
 		      oLinuxIconFile = oLinuxIconFile.Child("appicon_128.png")
+		      #If DebugBuild Then
+		        If (oLinuxIconFile = Nil) Or (Not oLinuxIconFile.Exists) Then
+		          oLinuxIconFile = oApp.Parent.Child("AppIcon_128.png") 'copied in DebugBuilds via CopyFileStep
+		        End If
+		      #EndIf
 		    End If
 		    If (oLinuxIconFile = Nil) Or oLinuxIconFile.Directory Or (Not oLinuxIconFile.Exists) Then
 		      MsgBox "Icon file 'appicon_128.png' not found next to the application executable. Let's continue without icon."
@@ -533,11 +565,12 @@ End
 		    filterFileType.Extensions = ""
 		    filterFileType.ConformsTo = "public.data, com.apple.resolvable"
 		  #ElseIf TargetLinux Then
-		    filterFileType.Extensions = ".desktop"
+		    filterFileType.Extensions = "desktop"
 		  #EndIf
 		  
+		  
+		  dlg.SuggestedFileName = "Launch My App" + If(filterFileType.Extensions <> "", "." + filterFileType.Extensions, "")
 		  dlg.Filter = filterFileType
-		  dlg.SuggestedFileName = "Launch My App"
 		  Dim fileShortcut As FolderItem = dlg.ShowModal
 		  
 		  If (fileShortcut = Nil) Then
@@ -545,8 +578,23 @@ End
 		    Return
 		  End If
 		  
+		  #If TargetWindows Then
+		    //https://docs.microsoft.com/en-us/dotnet/api/microsoft.win32.filedialog.addextension?view=windowsdesktop-6.0
+		  #ElseIf TargetLinux Then
+		    If (NthField(fileShortcut.Name, ".", CountFields(fileShortcut.Name, ".")) <> "desktop") Then
+		      fileShortcut.Name = fileShortcut.Name + ".desktop"
+		    End If
+		  #EndIf
+		  
+		  
 		  If oApp.CreateShortcut(fileShortcut, oLinuxIconFile) Then
-		    MsgBox constOsCaptionShortcut + " successfully created."
+		    Dim sLinuxInfo As String
+		    #If TargetLinux Then
+		      sLinuxInfo = EndOfLine + EndOfLine + _
+		      "Note: Depending on the Linux Distribution you need to manually " + _
+		      "right click the created file and choose 'Allow Launching'."
+		    #EndIf
+		    MsgBox constOsCaptionShortcut + " successfully created." + sLinuxInfo
 		  Else
 		    MsgBox "Failed to create " + constOsCaptionShortcut + "."
 		  End If

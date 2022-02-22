@@ -95,9 +95,12 @@ Protected Module modShortcut
 		        sIconFile = poLinuxIconFile.NativePath 'unescaped
 		      End If
 		      
+		      Dim sName As String = poShortcutFile.Name
+		      If (RightB(sName, 8) = ".desktop") Then sName = LeftB(sName, LenB(sName)-8) 'remove .desktop
+		      
 		      Dim sContent As String = "[Desktop Entry]" + EndOfLine.UNIX + _
 		      "Encoding=UTF-8" + EndOfLine.UNIX + _
-		      "Name=" + sShortcutFilename + EndOfLine.UNIX + _
+		      "Name=" + sName + EndOfLine.UNIX + _
 		      "Exec=" + sExeFile + EndOfLine.UNIX + _
 		      "Icon=" + sIconFile + EndOfLine.UNIX + _
 		      "Terminal=false" + EndOfLine.UNIX + _
@@ -111,7 +114,6 @@ Protected Module modShortcut
 		        #If (XojoVersion >= 2019.02) Then
 		          oStream.Encoding = Encodings.UTF8
 		        #EndIf
-		        oStream.Enc
 		      Catch errIO As IOException
 		        Return False
 		      End Try
@@ -124,6 +126,8 @@ Protected Module modShortcut
 		      shlHost.Execute "chmod 755 " + poShortcutFile.ShellPath
 		      shlHost.Close
 		      
+		      'Note: Depending on the Linux Distribution you need to manually
+		      '      right click the created file and choose 'Allow Launching'
 		      Return ((poShortcutFile <> Nil) And poShortcutFile.Exists)
 		    #EndIf
 		    
