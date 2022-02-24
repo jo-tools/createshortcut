@@ -294,7 +294,7 @@ Begin Window Window1
       LockRight       =   True
       LockTop         =   True
       Multiline       =   False
-      Scope           =   0
+      Scope           =   2
       Selectable      =   False
       TabIndex        =   7
       TabPanelIndex   =   0
@@ -352,7 +352,7 @@ End
 	#tag Constant, Name = constAppName, Type = String, Dynamic = False, Default = \"Create Shortcut", Scope = Private
 	#tag EndConstant
 
-	#tag Constant, Name = constOsCaptionShortcut, Type = String, Dynamic = False, Default = \"Shortcut", Scope = Public
+	#tag Constant, Name = constOsCaptionShortcut, Type = String, Dynamic = False, Default = \"Shortcut", Scope = Private
 		#Tag Instance, Platform = Mac OS, Language = Default, Definition  = \"Alias"
 		#Tag Instance, Platform = Windows, Language = Default, Definition  = \"Shortcut"
 		#Tag Instance, Platform = Linux, Language = Default, Definition  = \"Desktop Launch File"
@@ -367,6 +367,8 @@ End
 #tag Events cnvAppIcon
 	#tag Event
 		Sub Paint(g As Graphics, areas() As REALbasic.Rect)
+		  #Pragma unused areas
+		  
 		  g.DrawPicture(AppIcon_64, 0, 0)
 		End Sub
 	#tag EndEvent
@@ -379,6 +381,9 @@ End
 	#tag EndEvent
 	#tag Event
 		Function MouseDown(X As Integer, Y As Integer) As Boolean
+		  #Pragma unused X
+		  #Pragma unused Y
+		  
 		  Return True
 		End Function
 	#tag EndEvent
@@ -411,6 +416,9 @@ End
 	#tag EndEvent
 	#tag Event
 		Function MouseDown(X As Integer, Y As Integer) As Boolean
+		  #Pragma unused X
+		  #Pragma unused Y
+		  
 		  Return True
 		End Function
 	#tag EndEvent
@@ -452,6 +460,9 @@ End
 	#tag EndEvent
 	#tag Event
 		Function MouseDown(X As Integer, Y As Integer) As Boolean
+		  #Pragma unused X
+		  #Pragma unused Y
+		  
 		  Return True
 		End Function
 	#tag EndEvent
@@ -466,6 +477,8 @@ End
 #tag Events cnvPayPal
 	#tag Event
 		Sub Paint(g As Graphics, areas() As REALbasic.Rect)
+		  #Pragma unused areas
+		  
 		  g.ForeColor = &cFFFFFF
 		  #If (XojoVersion >= 2018.03) Then
 		    If IsDarkMode Then g.ForeColor = &cD0D0D0
@@ -496,6 +509,9 @@ End
 	#tag EndEvent
 	#tag Event
 		Function MouseDown(X As Integer, Y As Integer) As Boolean
+		  #Pragma unused X
+		  #Pragma unused Y
+		  
 		  Return True
 		End Function
 	#tag EndEvent
@@ -559,7 +575,7 @@ End
 		  filterFileType.Name = constOsCaptionShortcut
 		  
 		  #If TargetWindows Then
-		    filterFileType.Extensions = ".lnk"
+		    filterFileType.Extensions = "lnk"
 		  #ElseIf TargetMacOS Then
 		    filterFileType.UTI = "com.apple.alias-file"
 		    filterFileType.Extensions = ""
@@ -604,12 +620,12 @@ End
 	#tag Event
 		Sub Open()
 		  #If TargetLinux Then
-		    me.Width = 300
+		    Me.Width = 300
 		    Me.Height = 32
 		    Me.Top = Me.Top - 5
 		  #EndIf
 		  
-		  me.Caption = "Create " + constOsCaptionShortcut
+		  Me.Caption = "Create " + constOsCaptionShortcut
 		End Sub
 	#tag EndEvent
 #tag EndEvents
