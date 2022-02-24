@@ -36,7 +36,7 @@ Protected Module modShortcut
 		      
 		      Try
 		        //https://docs.microsoft.com/en-us/troubleshoot/windows-client/admin-development/create-desktop-shortcut-with-wsh
-		        //Windows Script Host Shell Object
+		        //Windows Script Host
 		        Dim oOLEObject As New OLEObject("{F935DC22-1CF0-11D0-ADB9-00C04FD58A0B}")
 		        If (oOLEObject = Nil) Then Return False
 		        
@@ -66,6 +66,7 @@ Protected Module modShortcut
 		    #If TargetMacOS Then
 		      #Pragma unused poLinuxIconFile
 		      
+		      //https://developer.apple.com/documentation/foundation/nsurl/1408532-writebookmarkdata?language=objc
 		      Declare Function NSClassFromString Lib "Cocoa" (className As CFStringRef) As Ptr
 		      Declare Function fileURLWithPath Lib "Foundation" selector "fileURLWithPath:" (ptrNSURLClass As Ptr, path As CFStringRef) As Ptr
 		      Declare Function bookmarkDataWithOptions Lib "Foundation" selector "bookmarkDataWithOptions:includingResourceValuesForKeys:relativeToURL:error:" (ptrNSURL As Ptr, options As Integer, keys As Ptr, relativeURL As Ptr, error As Ptr) As Ptr
