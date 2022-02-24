@@ -548,12 +548,8 @@ End
 		  #If TargetLinux Then
 		    oLinuxIconFile = oApp.Parent
 		    If (oLinuxIconFile <> Nil) And oLinuxIconFile.Directory Then
-		      oLinuxIconFile = oLinuxIconFile.Child("appicon_128.png")
-		      #If DebugBuild Then
-		        If (oLinuxIconFile = Nil) Or (Not oLinuxIconFile.Exists) Then
-		          oLinuxIconFile = oApp.Parent.Child("AppIcon_128.png") 'copied in DebugBuilds via CopyFileStep
-		        End If
-		      #EndIf
+		      'copied to App Parent Folder via Linux-CopyFileStep
+		      oLinuxIconFile = oLinuxIconFile.Child("CreateShortcut.png")
 		    End If
 		    If (oLinuxIconFile = Nil) Or oLinuxIconFile.Directory Or (Not oLinuxIconFile.Exists) Then
 		      MsgBox "Icon file 'appicon_128.png' not found next to the application executable. Let's continue without icon."

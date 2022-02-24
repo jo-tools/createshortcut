@@ -2,11 +2,11 @@
 			Begin BuildStepList Linux
 				Begin BuildProjectStep Build
 				End
-				Begin CopyFilesBuildStep CopyDebugRunAppIcon
-					AppliesTo = 1
+				Begin CopyFilesBuildStep CopyLinuxAppIcon
+					AppliesTo = 0
 					Destination = 0
 					Subdirectory = 
-					FolderItem = Li4vcmVzb3VyY2VzL0FwcEljb25fMTI4LnBuZw==
+					FolderItem = Li4vcmVzb3VyY2VzL0NyZWF0ZVNob3J0Y3V0LnBuZw==
 				End
 			End
 			Begin BuildStepList Mac OS X
