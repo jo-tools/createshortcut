@@ -1,11 +1,11 @@
 Type=Desktop
 RBProjectVersion=2023.04
-MinIDEVersion=20150400
+MinIDEVersion=20210300
 OrigIDEVersion=00000000
 Folder=createshortcut;createshortcut;&h00000000491A47FF;&h0000000000000000;false
 Module=modShortcut;createshortcut/modShortcut.xojo_code;&h000000003FE86FFF;&h00000000491A47FF;false
 Class=App;createshortcut/App.xojo_code;&h0000000067F0DFFF;&h00000000491A47FF;false
-Window=Window1;createshortcut/Window1.xojo_window;&h000000007BA597FF;&h00000000491A47FF;false
+DesktopWindow=Window1;createshortcut/Window1.xojo_window;&h000000007BA597FF;&h00000000491A47FF;false
 MenuBar=MainMenuBar;createshortcut/MainMenuBar.xojo_menu;&h00000000416327FF;&h00000000491A47FF;false
 Folder=resources;resources;&h0000000034578FFF;&h0000000000000000;false
 MultiImage=AppIcon_64;resources/AppIcon_64.xojo_image;&h0000000070ECD7FF;&h0000000034578FFF;false
