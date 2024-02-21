@@ -18,12 +18,12 @@ Protected Module modShortcut
 		    If (sShortcutFilename = "") Then Return False
 		    
 		    #If TargetWindows Then
-		      If (NthField(sShortcutFilename, ".", CountFields(sShortcutFilename, ".")) <> "lnk") Then
+		      If (sShortcutFilename.NthField(".", sShortcutFilename.CountFields(".")) <> "lnk") Then
 		        Break 'Expected a File with Extension .lnk
 		        Return False
 		      End If
 		    #ElseIf TargetLinux Then
-		      If (NthField(sShortcutFilename, ".", CountFields(sShortcutFilename, ".")) <> "desktop") Then
+		      If (sShortcutFilename.NthField(".", sShortcutFilename.CountFields(".")) <> "desktop") Then
 		        Break 'Expected a File with Extension .desktop
 		        Return False
 		      End If
@@ -45,7 +45,7 @@ Protected Module modShortcut
 		        
 		        oOLEShortcutObject.Description = sShortcutFilename
 		        oOLEShortcutObject.TargetPath = poOrigin.NativePath
-		        If poOrigin.Directory Then
+		        If poOrigin.IsFolder Then
 		          oOLEShortcutObject.WorkingDirectory = poOrigin.NativePath
 		        Else
 		          If (poOrigin.Parent <> Nil) Then
@@ -92,12 +92,12 @@ Protected Module modShortcut
 		    #If TargetLinux Then
 		      Dim sExeFile As String = poOrigin.NativePath 'unescaped
 		      Dim sIconFile As String = ""
-		      If (poLinuxIconFile <> Nil) And (Not poLinuxIconFile.Directory) And poLinuxIconFile.Exists Then
+		      If (poLinuxIconFile <> Nil) And (Not poLinuxIconFile.IsFolder) And poLinuxIconFile.Exists Then
 		        sIconFile = poLinuxIconFile.NativePath 'unescaped
 		      End If
 		      
 		      Dim sName As String = poShortcutFile.Name
-		      If (RightB(sName, 8) = ".desktop") Then sName = LeftB(sName, LenB(sName)-8) 'remove .desktop
+		      If (sName.RightBytes(8) = ".desktop") Then sName = sName.LeftBytes(sName.Bytes - 8) 'remove .desktop
 		      
 		      Dim sContent As String = "[Desktop Entry]" + EndOfLine.UNIX + _
 		      "Encoding=UTF-8" + EndOfLine.UNIX + _
@@ -112,9 +112,7 @@ Protected Module modShortcut
 		      Dim oStream As TextOutputStream
 		      Try
 		        oStream = TextOutputStream.Create(poShortcutFile)
-		        #If (XojoVersion >= 2019.02) Then
-		          oStream.Encoding = Encodings.UTF8
-		        #EndIf
+		        oStream.Encoding = Encodings.UTF8
 		      Catch errIO As IOException
 		        Return False
 		      End Try

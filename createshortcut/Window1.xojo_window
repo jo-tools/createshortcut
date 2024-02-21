@@ -321,7 +321,7 @@ End
 		    If (AppIcon_128 = Nil) Then Return
 		    
 		    'set Window Icon
-		    Declare Sub gtk_window_set_icon Lib "libgtk-3" (windowHandle As Integer, icon As Ptr)
+		    Declare Sub gtk_window_set_icon Lib "libgtk-3" (windowHandle As Ptr, icon As Ptr)
 		    Declare Sub g_object_unref Lib "libgtk-3" (Object As Ptr)
 		    
 		    Try
@@ -470,9 +470,7 @@ End
 		  #Pragma unused areas
 		  
 		  g.DrawingColor = &cFFFFFF
-		  #If (XojoVersion >= 2018.03) Then
-		    If Color.IsDarkMode Then g.DrawingColor = &cD0D0D0
-		  #EndIf
+		  If Color.IsDarkMode Then g.DrawingColor = &cD0D0D0
 		  g.FillRectangle(0, 0, g.Width, g.Height)
 		  g.DrawingColor = &c909090
 		  g.DrawRectangle(0, 0, g.Width, g.Height)
