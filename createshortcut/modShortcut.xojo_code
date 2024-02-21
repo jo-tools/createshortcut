@@ -9,11 +9,11 @@ Protected Module modShortcut
 		    
 		    'Check Shortcut File
 		    If (poShortcutFile = Nil) Or (poShortcutFile.Parent = Nil) Then Return False
-		    Dim oShortcutInFolder As FolderItem = poShortcutFile.Parent
+		    Var oShortcutInFolder As FolderItem = poShortcutFile.Parent
 		    If (Not oShortcutInFolder.Exists) Or (Not oShortcutInFolder.IsFolder) Then Return False
 		    
 		    'Check Shortcut Filename
-		    Dim sShortcutFilename As String = poShortcutFile.Name
+		    Var sShortcutFilename As String = poShortcutFile.Name
 		    If (sShortcutFilename = "") Then sShortcutFilename = poOrigin.DisplayName
 		    If (sShortcutFilename = "") Then Return False
 		    
@@ -37,10 +37,10 @@ Protected Module modShortcut
 		      Try
 		        //https://docs.microsoft.com/en-us/troubleshoot/windows-client/admin-development/create-desktop-shortcut-with-wsh
 		        //Windows Script Host
-		        Dim oOLEObject As New OLEObject("{F935DC22-1CF0-11D0-ADB9-00C04FD58A0B}")
+		        Var oOLEObject As New OLEObject("{F935DC22-1CF0-11D0-ADB9-00C04FD58A0B}")
 		        If (oOLEObject = Nil) Then Return False
 		        
-		        Dim oOLEShortcutObject As OLEObject = oOLEObject.CreateShortcut(poShortcutFile.NativePath)
+		        Var oOLEShortcutObject As OLEObject = oOLEObject.CreateShortcut(poShortcutFile.NativePath)
 		        If (oOLEShortcutObject = Nil) Then Return False
 		        
 		        oOLEShortcutObject.Description = sShortcutFilename
@@ -74,32 +74,32 @@ Protected Module modShortcut
 		      
 		      Const kNSURLBookmarkCreationSuitableForBookmarkFile = 1024
 		      
-		      Dim ptrNSURLClass As Ptr = NSClassFromString("NSURL")
+		      Var ptrNSURLClass As Ptr = NSClassFromString("NSURL")
 		      If (ptrNSURLClass = Nil) Then Return False
 		      
-		      Dim ptrAppURL As Ptr = fileURLWithPath(ptrNSURLClass, poOrigin.NativePath)
+		      Var ptrAppURL As Ptr = fileURLWithPath(ptrNSURLClass, poOrigin.NativePath)
 		      If (ptrAppURL = Nil) Then Return False
 		      
-		      Dim ptrAliasURL As Ptr = fileURLWithPath(ptrNSURLClass, poShortcutFile.NativePath)
+		      Var ptrAliasURL As Ptr = fileURLWithPath(ptrNSURLClass, poShortcutFile.NativePath)
 		      If (ptrAliasURL = Nil) Then Return False
 		      
-		      Dim ptrBookmarkData As Ptr = bookmarkDataWithOptions(ptrAppURL, kNSURLBookmarkCreationSuitableForBookmarkFile, Nil, Nil, Nil)
+		      Var ptrBookmarkData As Ptr = bookmarkDataWithOptions(ptrAppURL, kNSURLBookmarkCreationSuitableForBookmarkFile, Nil, Nil, Nil)
 		      If (ptrBookmarkData = Nil) Then Return False
 		      
 		      Return writeBookmarkData(ptrNSURLClass, ptrBookmarkData, ptrAliasURL, kNSURLBookmarkCreationSuitableForBookmarkFile, Nil)
 		    #EndIf
 		    
 		    #If TargetLinux Then
-		      Dim sExeFile As String = poOrigin.NativePath 'unescaped
-		      Dim sIconFile As String = ""
+		      Var sExeFile As String = poOrigin.NativePath 'unescaped
+		      Var sIconFile As String = ""
 		      If (poLinuxIconFile <> Nil) And (Not poLinuxIconFile.IsFolder) And poLinuxIconFile.Exists Then
 		        sIconFile = poLinuxIconFile.NativePath 'unescaped
 		      End If
 		      
-		      Dim sName As String = poShortcutFile.Name
+		      Var sName As String = poShortcutFile.Name
 		      If (sName.RightBytes(8) = ".desktop") Then sName = sName.LeftBytes(sName.Bytes - 8) 'remove .desktop
 		      
-		      Dim sContent As String = "[Desktop Entry]" + EndOfLine.UNIX + _
+		      Var sContent As String = "[Desktop Entry]" + EndOfLine.UNIX + _
 		      "Encoding=UTF-8" + EndOfLine.UNIX + _
 		      "Name=" + sName + EndOfLine.UNIX + _
 		      "Exec=" + sExeFile + EndOfLine.UNIX + _
@@ -109,7 +109,7 @@ Protected Module modShortcut
 		      "Categories=Office"
 		      sContent = ConvertEncoding(sContent, Encodings.UTF8)
 		      
-		      Dim oStream As TextOutputStream
+		      Var oStream As TextOutputStream
 		      Try
 		        oStream = TextOutputStream.Create(poShortcutFile)
 		        oStream.Encoding = Encodings.UTF8
@@ -121,7 +121,7 @@ Protected Module modShortcut
 		      oStream.Write(sContent)
 		      oStream.Close
 		      
-		      Dim shlHost As New Shell
+		      Var shlHost As New Shell
 		      shlHost.Execute "chmod 755 " + poShortcutFile.ShellPath
 		      shlHost.Close
 		      

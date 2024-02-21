@@ -25,9 +25,13 @@ Begin DesktopWindow Window1
    Visible         =   True
    Width           =   600
    Begin DesktopCanvas cnvAppIcon
-      AcceptFocus     =   False
-      AcceptTabs      =   False
-      AutoDeactivate  =   True
+      AcceptFocus     =   "False"
+      AcceptTabs      =   "False"
+      AllowAutoDeactivate=   True
+      AllowFocus      =   False
+      AllowFocusRing  =   True
+      AllowTabs       =   False
+      AutoDeactivate  =   "True"
       Backdrop        =   0
       Enabled         =   True
       Height          =   64
@@ -44,16 +48,21 @@ Begin DesktopWindow Window1
       TabIndex        =   0
       TabPanelIndex   =   0
       TabStop         =   True
+      Tooltip         =   ""
       Top             =   20
       Transparent     =   True
-      UseFocusRing    =   True
+      UseFocusRing    =   "True"
       Visible         =   True
       Width           =   64
    End
    Begin DesktopLabel labAppName
-      AutoDeactivate  =   True
+      AllowAutoDeactivate=   True
+      AutoDeactivate  =   "True"
       Bold            =   True
       Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
       Height          =   30
       HelpTag         =   "#constWebsiteUrl"
       Index           =   -2147483648
@@ -72,11 +81,13 @@ Begin DesktopWindow Window1
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "AppName"
-      TextAlign       =   2
+      TextAlign       =   "2"
+      TextAlignment   =   0
       TextColor       =   &c0072D800
       TextFont        =   "System"
-      TextSize        =   0.0
-      TextUnit        =   0
+      TextSize        =   "0.0"
+      TextUnit        =   "0"
+      Tooltip         =   ""
       Top             =   20
       Transparent     =   True
       Underline       =   True
@@ -84,9 +95,13 @@ Begin DesktopWindow Window1
       Width           =   200
    End
    Begin DesktopLabel labThanks
-      AutoDeactivate  =   True
+      AllowAutoDeactivate=   True
+      AutoDeactivate  =   "True"
       Bold            =   False
       Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
       Height          =   30
       HelpTag         =   ""
       Index           =   -2147483648
@@ -105,11 +120,13 @@ Begin DesktopWindow Window1
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "Would you like to say 'Thank you'?"
-      TextAlign       =   3
+      TextAlign       =   "3"
+      TextAlignment   =   0
       TextColor       =   &c66666600
       TextFont        =   "SmallSystem"
-      TextSize        =   0.0
-      TextUnit        =   0
+      TextSize        =   "0.0"
+      TextUnit        =   "0"
+      Tooltip         =   ""
       Top             =   20
       Transparent     =   True
       Underline       =   False
@@ -117,9 +134,13 @@ Begin DesktopWindow Window1
       Width           =   209
    End
    Begin DesktopLabel labAppVersion
-      AutoDeactivate  =   True
+      AllowAutoDeactivate=   True
+      AutoDeactivate  =   "True"
       Bold            =   False
       Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
       Height          =   30
       HelpTag         =   ""
       Index           =   -2147483648
@@ -138,11 +159,13 @@ Begin DesktopWindow Window1
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "AppVersion"
-      TextAlign       =   2
+      TextAlign       =   "2"
+      TextAlignment   =   0
       TextColor       =   &c00000000
       TextFont        =   "System"
-      TextSize        =   0.0
-      TextUnit        =   0
+      TextSize        =   "0.0"
+      TextUnit        =   "0"
+      Tooltip         =   ""
       Top             =   54
       Transparent     =   True
       Underline       =   False
@@ -150,9 +173,13 @@ Begin DesktopWindow Window1
       Width           =   200
    End
    Begin DesktopLabel labContact
-      AutoDeactivate  =   True
+      AllowAutoDeactivate=   True
+      AutoDeactivate  =   "True"
       Bold            =   False
       Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
       Height          =   30
       HelpTag         =   "xojo@jo-tools.ch"
       Index           =   -2147483648
@@ -171,11 +198,13 @@ Begin DesktopWindow Window1
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "Contact"
-      TextAlign       =   2
+      TextAlign       =   "2"
+      TextAlignment   =   0
       TextColor       =   &c0072CE00
       TextFont        =   "System"
-      TextSize        =   0.0
-      TextUnit        =   0
+      TextSize        =   "0.0"
+      TextUnit        =   "0"
+      Tooltip         =   ""
       Top             =   54
       Transparent     =   True
       Underline       =   True
@@ -183,9 +212,13 @@ Begin DesktopWindow Window1
       Width           =   70
    End
    Begin DesktopCanvas cnvPayPal
-      AcceptFocus     =   False
-      AcceptTabs      =   False
-      AutoDeactivate  =   True
+      AcceptFocus     =   "False"
+      AcceptTabs      =   "False"
+      AllowAutoDeactivate=   True
+      AllowFocus      =   False
+      AllowFocusRing  =   True
+      AllowTabs       =   False
+      AutoDeactivate  =   "True"
       Backdrop        =   0
       Enabled         =   True
       Height          =   30
@@ -202,15 +235,18 @@ Begin DesktopWindow Window1
       TabIndex        =   5
       TabPanelIndex   =   0
       TabStop         =   True
+      Tooltip         =   ""
       Top             =   54
       Transparent     =   True
-      UseFocusRing    =   True
+      UseFocusRing    =   "True"
       Visible         =   True
       Width           =   106
    End
    Begin DesktopSeparator sepTop
+      Active          =   False
+      AllowAutoDeactivate=   True
       AllowTabStop    =   True
-      AutoDeactivate  =   True
+      AutoDeactivate  =   "True"
       Enabled         =   True
       Height          =   3
       HelpTag         =   ""
@@ -222,22 +258,32 @@ Begin DesktopWindow Window1
       LockLeft        =   True
       LockRight       =   True
       LockTop         =   True
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   6
       TabPanelIndex   =   0
+      Tooltip         =   ""
       Top             =   100
       Transparent     =   True
       Visible         =   True
       Width           =   600
+      _mIndex         =   0
+      _mInitialParent =   ""
+      _mName          =   ""
+      _mPanelIndex    =   0
    End
    Begin DesktopButton btnCreateShortcut
-      AutoDeactivate  =   True
+      AllowAutoDeactivate=   True
+      AutoDeactivate  =   "True"
       Bold            =   False
-      ButtonStyle     =   0
+      ButtonStyle     =   "0"
       Cancel          =   False
       Caption         =   "Create Shortcut"
       Default         =   False
       Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
       Height          =   20
       HelpTag         =   ""
       Index           =   -2147483648
@@ -249,13 +295,15 @@ Begin DesktopWindow Window1
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
+      MacButtonStyle  =   0
       Scope           =   2
       TabIndex        =   8
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "System"
-      TextSize        =   0.0
-      TextUnit        =   0
+      TextSize        =   "0.0"
+      TextUnit        =   "0"
+      Tooltip         =   ""
       Top             =   150
       Transparent     =   False
       Underline       =   False
@@ -263,9 +311,13 @@ Begin DesktopWindow Window1
       Width           =   180
    End
    Begin DesktopLabel labInfo
-      AutoDeactivate  =   True
+      AllowAutoDeactivate=   True
+      AutoDeactivate  =   "True"
       Bold            =   False
       Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
       Height          =   20
       HelpTag         =   ""
       Index           =   -2147483648
@@ -284,11 +336,13 @@ Begin DesktopWindow Window1
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "This example will simply create a shortcut to this application."
-      TextAlign       =   0
+      TextAlign       =   "0"
+      TextAlignment   =   0
       TextColor       =   &c00000000
       TextFont        =   "System"
-      TextSize        =   0.0
-      TextUnit        =   0
+      TextSize        =   "0.0"
+      TextUnit        =   "0"
+      Tooltip         =   ""
       Top             =   115
       Transparent     =   False
       Underline       =   False
@@ -304,7 +358,7 @@ End
 		  Me.Title = constAppName
 		  
 		  #If TargetMacOS Then
-		    Dim rect As Xojo.Rect = Self.Bounds
+		    Var rect As Xojo.Rect = Self.Bounds
 		    rect.Top = DesktopDisplay.DisplayAt(0).AvailableTop
 		    Self.Bounds = rect
 		  #EndIf
@@ -325,7 +379,7 @@ End
 		    Declare Sub g_object_unref Lib "libgtk-3" (Object As Ptr)
 		    
 		    Try
-		      Dim ptrToIcon As Ptr = AppIcon_128.CopyOSHandle(Picture.HandleType.LinuxGdkPixbuf)
+		      Var ptrToIcon As Ptr = AppIcon_128.CopyOSHandle(Picture.HandleType.LinuxGdkPixbuf)
 		      If (ptrToIcon <> Nil) Then
 		        gtk_window_set_icon(Self.Handle, ptrToIcon)
 		        g_object_unref(ptrToIcon)
@@ -510,7 +564,7 @@ End
 		  'This example will create a shortcut to this application
 		  'So let's get the FolderItem for the application
 		  
-		  Dim oApp As FolderItem = App.ExecutableFile
+		  Var oApp As FolderItem = App.ExecutableFile
 		  #If TargetMacOS Then
 		    'get the main 'Application.app' folder
 		    '/CreateShortcut.app/Contents/MacOS/CreateShortcut
@@ -532,7 +586,7 @@ End
 		  
 		  'Linux: The Desktop Launch Item needs an Icon
 		  '       Xojo adds some appicons next to the executable, so let's get that one
-		  Dim oLinuxIconFile As FolderItem
+		  Var oLinuxIconFile As FolderItem
 		  #If TargetLinux Then
 		    oLinuxIconFile = oApp.Parent
 		    If (oLinuxIconFile <> Nil) And oLinuxIconFile.Directory Then
@@ -550,12 +604,12 @@ End
 		  
 		  
 		  'Ask the user where to save the Shortcut File
-		  Dim dlg As New SaveFileDialog
+		  Var dlg As New SaveFileDialog
 		  dlg.InitialFolder = SpecialFolder.Desktop
 		  dlg.Title = "Create " + constOsCaptionShortcut
 		  dlg.PromptText = "Create " + constOsCaptionShortcut + " for Application '" + constAppName + "'"
 		  
-		  Dim filterFileType As New FileType
+		  Var filterFileType As New FileType
 		  filterFileType.Name = constOsCaptionShortcut
 		  
 		  #If TargetWindows Then
@@ -571,7 +625,7 @@ End
 		  
 		  dlg.SuggestedFileName = "Launch My App" + If(filterFileType.Extensions <> "", "." + filterFileType.Extensions, "")
 		  dlg.Filter = filterFileType
-		  Dim fileShortcut As FolderItem = dlg.ShowModal
+		  Var fileShortcut As FolderItem = dlg.ShowModal
 		  
 		  If (fileShortcut = Nil) Then
 		    'Dialog Cancelled
@@ -588,7 +642,7 @@ End
 		  
 		  
 		  If oApp.CreateShortcut(fileShortcut, oLinuxIconFile) Then
-		    Dim sLinuxInfo As String
+		    Var sLinuxInfo As String
 		    #If TargetLinux Then
 		      sLinuxInfo = EndOfLine + EndOfLine + _
 		      "Note: Depending on the Linux Distribution you need to manually " + _
@@ -670,8 +724,7 @@ End
 			"6 - Rounded Window"
 			"7 - Global Floating Window"
 			"8 - Sheet Window"
-			"9 - Metal Window"
-			"11 - Modeless Dialog"
+			"9 - Modeless Dialog"
 		#tag EndEnumValues
 	#tag EndViewProperty
 	#tag ViewProperty
@@ -734,8 +787,8 @@ End
 		Visible=true
 		Group="Background"
 		InitialValue="&hFFFFFF"
-		Type="Color"
-		EditorType="Color"
+		Type="ColorGroup"
+		EditorType="ColorGroup"
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Name"
@@ -846,7 +899,7 @@ End
 		Visible=true
 		Group="Menus"
 		InitialValue=""
-		Type="MenuBar"
+		Type="DesktopMenuBar"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
