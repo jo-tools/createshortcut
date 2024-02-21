@@ -29,8 +29,8 @@ Linux: **Desktop Launch Icon**
 [Xojo](https://www.xojo.com/) is a rapid application development for Desktop, Web, Mobile & Raspberry Pi.  
 
 The Desktop application Xojo example project ```CreateShortcut.xojo_project``` is using:
-- Xojo 2018r4
-- API 1
+- Xojo 2023r4
+- API 2
 
 ### How to use in your own Xojo project?
 1. Copy and Paste the Module ```modShortcut``` to your project. Or just copy and paste the extends method ```CreateShortcut``` to one of your global Modules.
