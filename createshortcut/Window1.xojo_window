@@ -302,6 +302,12 @@ End
 	#tag Event
 		Sub Opening()
 		  Me.Title = constAppName
+		  
+		  #If TargetMacOS Then
+		    Dim rect As Xojo.Rect = Self.Bounds
+		    rect.Top = DesktopDisplay.DisplayAt(0).AvailableTop
+		    Self.Bounds = rect
+		  #EndIf
 		End Sub
 	#tag EndEvent
 
