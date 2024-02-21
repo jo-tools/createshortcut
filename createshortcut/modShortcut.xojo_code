@@ -145,6 +145,25 @@ Protected Module modShortcut
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Function GetLinuxUserLocalSharedAppsFolder() As FolderItem
+		  Var oFolder As FolderItem = SpecialFolder.UserHome
+		  If (oFolder = Nil) Or (Not oFolder.IsFolder) Then Return Nil
+		  
+		  oFolder = oFolder.Child(".local")
+		  If (oFolder = Nil) Or (Not oFolder.IsFolder) Then Return Nil
+		  
+		  oFolder = oFolder.Child("share")
+		  If (oFolder = Nil) Or (Not oFolder.IsFolder) Then Return Nil
+		  
+		  oFolder = oFolder.Child("applications")
+		  If (oFolder = Nil) Or (Not oFolder.IsFolder) Then Return Nil
+		  
+		  Return oFolder
+		  
+		End Function
+	#tag EndMethod
+
 
 	#tag ViewBehavior
 		#tag ViewProperty
