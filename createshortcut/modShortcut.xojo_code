@@ -10,7 +10,7 @@ Protected Module modShortcut
 		    'Check Shortcut File
 		    If (poShortcutFile = Nil) Or (poShortcutFile.Parent = Nil) Then Return False
 		    Dim oShortcutInFolder As FolderItem = poShortcutFile.Parent
-		    If (Not oShortcutInFolder.Exists) Or (Not oShortcutInFolder.Directory) Then Return False
+		    If (Not oShortcutInFolder.Exists) Or (Not oShortcutInFolder.IsFolder) Then Return False
 		    
 		    'Check Shortcut Filename
 		    Dim sShortcutFilename As String = poShortcutFile.Name
@@ -153,7 +153,9 @@ Protected Module modShortcut
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
@@ -161,12 +163,15 @@ Protected Module modShortcut
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -174,6 +179,7 @@ Protected Module modShortcut
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Top"
@@ -181,6 +187,7 @@ Protected Module modShortcut
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Module

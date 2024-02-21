@@ -29,9 +29,7 @@ Begin DesktopWindow Window1
       AcceptTabs      =   False
       AutoDeactivate  =   True
       Backdrop        =   0
-      DoubleBuffer    =   False
       Enabled         =   True
-      EraseBackground =   "True"
       Height          =   64
       HelpTag         =   "#constWebsiteUrl"
       Index           =   -2147483648
@@ -55,8 +53,6 @@ Begin DesktopWindow Window1
    Begin DesktopLabel labAppName
       AutoDeactivate  =   True
       Bold            =   True
-      DataField       =   ""
-      DataSource      =   ""
       Enabled         =   True
       Height          =   30
       HelpTag         =   "#constWebsiteUrl"
@@ -90,8 +86,6 @@ Begin DesktopWindow Window1
    Begin DesktopLabel labThanks
       AutoDeactivate  =   True
       Bold            =   False
-      DataField       =   ""
-      DataSource      =   ""
       Enabled         =   True
       Height          =   30
       HelpTag         =   ""
@@ -125,8 +119,6 @@ Begin DesktopWindow Window1
    Begin DesktopLabel labAppVersion
       AutoDeactivate  =   True
       Bold            =   False
-      DataField       =   ""
-      DataSource      =   ""
       Enabled         =   True
       Height          =   30
       HelpTag         =   ""
@@ -160,8 +152,6 @@ Begin DesktopWindow Window1
    Begin DesktopLabel labContact
       AutoDeactivate  =   True
       Bold            =   False
-      DataField       =   ""
-      DataSource      =   ""
       Enabled         =   True
       Height          =   30
       HelpTag         =   "xojo@jo-tools.ch"
@@ -197,9 +187,7 @@ Begin DesktopWindow Window1
       AcceptTabs      =   False
       AutoDeactivate  =   True
       Backdrop        =   0
-      DoubleBuffer    =   False
       Enabled         =   True
-      EraseBackground =   "True"
       Height          =   30
       HelpTag         =   "https://paypal.me/jotools"
       Index           =   -2147483648
@@ -221,6 +209,7 @@ Begin DesktopWindow Window1
       Width           =   106
    End
    Begin DesktopSeparator sepTop
+      AllowTabStop    =   True
       AutoDeactivate  =   True
       Enabled         =   True
       Height          =   3
@@ -236,7 +225,6 @@ Begin DesktopWindow Window1
       Scope           =   2
       TabIndex        =   6
       TabPanelIndex   =   0
-      TabStop         =   True
       Top             =   100
       Transparent     =   True
       Visible         =   True
@@ -277,8 +265,6 @@ Begin DesktopWindow Window1
    Begin DesktopLabel labInfo
       AutoDeactivate  =   True
       Bold            =   False
-      DataField       =   ""
-      DataSource      =   ""
       Enabled         =   True
       Height          =   20
       HelpTag         =   ""
@@ -373,7 +359,7 @@ End
 	#tag Event
 		Sub MouseUp(x As Integer, y As Integer)
 		  If (x >= 0) And (x < Me.Width) And (y > 0) And (y < Me.Height) Then
-		    ShowURL(constWebsiteUrl)
+		    System.GotoURL(constWebsiteUrl)
 		  End If
 		End Sub
 	#tag EndEvent
@@ -408,7 +394,7 @@ End
 	#tag Event
 		Sub MouseUp(x As Integer, y As Integer)
 		  If (x >= 0) And (x < Me.Width) And (y > 0) And (y < Me.Height) Then
-		    ShowURL(constWebsiteUrl)
+		    System.GotoURL(constWebsiteUrl)
 		  End If
 		End Sub
 	#tag EndEvent
@@ -467,7 +453,7 @@ End
 	#tag Event
 		Sub MouseUp(x As Integer, y As Integer)
 		  If (x >= 0) And (x < Me.Width) And (y > 0) And (y < Me.Height) Then
-		    ShowURL("mailto:xojo@jo-tools.ch")
+		    System.GotoURL("mailto:xojo@jo-tools.ch")
 		  End If
 		End Sub
 	#tag EndEvent
@@ -477,13 +463,13 @@ End
 		Sub Paint(g As Graphics, areas() As Rect)
 		  #Pragma unused areas
 		  
-		  g.ForeColor = &cFFFFFF
+		  g.DrawingColor = &cFFFFFF
 		  #If (XojoVersion >= 2018.03) Then
-		    If IsDarkMode Then g.ForeColor = &cD0D0D0
+		    If Color.IsDarkMode Then g.DrawingColor = &cD0D0D0
 		  #EndIf
-		  g.FillRect(0, 0, g.Width, g.Height)
-		  g.ForeColor = &c909090
-		  g.DrawRect(0, 0, g.Width, g.Height)
+		  g.FillRectangle(0, 0, g.Width, g.Height)
+		  g.DrawingColor = &c909090
+		  g.DrawRectangle(0, 0, g.Width, g.Height)
 		  g.DrawPicture(PayPal, 3, 2, 100, 26, 0, 0, PayPal.Width, PayPal.Height)
 		End Sub
 	#tag EndEvent
@@ -501,7 +487,7 @@ End
 	#tag Event
 		Sub MouseUp(x As Integer, y As Integer)
 		  If (x >= 0) And (x < Me.Width) And (y > 0) And (y < Me.Height) Then
-		    ShowURL("https://paypal.me/jotools")
+		    System.GotoURL("https://paypal.me/jotools")
 		  End If
 		End Sub
 	#tag EndEvent
@@ -528,14 +514,14 @@ End
 		      oApp = oApp.Parent
 		      If (oApp <> Nil) And (oApp.Parent <> Nil) And (oApp.Parent.Name = "Contents") Then
 		        oApp = oApp.Parent
-		        If (oApp <> Nil) And (oApp.Parent <> Nil) And oApp.Directory Then
+		        If (oApp <> Nil) And (oApp.Parent <> Nil) And oApp.IsFolder Then
 		          oApp = oApp.Parent
 		        End If
 		      End If
 		    End If
 		  #EndIf
 		  If (oApp = Nil) Or (oApp.Exists = False) Then
-		    MsgBox "Could not get the FolderItem for the Application executable."
+		    MessageBox "Could not get the FolderItem for the Application executable."
 		    Return
 		  End If
 		  
@@ -550,18 +536,18 @@ End
 		      oLinuxIconFile = oLinuxIconFile.Child("CreateShortcut.png")
 		    End If
 		    If (oLinuxIconFile = Nil) Or oLinuxIconFile.Directory Or (Not oLinuxIconFile.Exists) Then
-		      MsgBox "Icon file 'appicon_128.png' not found next to the application executable. Let's continue without icon."
+		      MessageBox "Icon file 'appicon_128.png' not found next to the application executable. Let's continue without icon."
 		    End If
 		  #EndIf
 		  
 		  #If DebugBuild Then
-		    MsgBox "Note: This is a Debug Run." + EndOfLine + EndOfLine + "The " + constOsCaptionShortcut + " you're going to create will point to the DebugBuild, which doesn't make much sense."
+		    MessageBox "Note: This is a Debug Run." + EndOfLine + EndOfLine + "The " + constOsCaptionShortcut + " you're going to create will point to the DebugBuild, which doesn't make much sense."
 		  #EndIf
 		  
 		  
 		  'Ask the user where to save the Shortcut File
-		  Dim dlg As New SaveAsDialog
-		  dlg.InitialDirectory = SpecialFolder.Desktop
+		  Dim dlg As New SaveFileDialog
+		  dlg.InitialFolder = SpecialFolder.Desktop
 		  dlg.Title = "Create " + constOsCaptionShortcut
 		  dlg.PromptText = "Create " + constOsCaptionShortcut + " for Application '" + constAppName + "'"
 		  
@@ -604,9 +590,9 @@ End
 		      "Note: Depending on the Linux Distribution you need to manually " + _
 		      "right click the created file and choose 'Allow Launching'."
 		    #EndIf
-		    MsgBox constOsCaptionShortcut + " successfully created." + sLinuxInfo
+		    MessageBox constOsCaptionShortcut + " successfully created." + sLinuxInfo
 		  Else
-		    MsgBox "Failed to create " + constOsCaptionShortcut + "."
+		    MessageBox "Failed to create " + constOsCaptionShortcut + "."
 		  End If
 		  
 		End Sub
