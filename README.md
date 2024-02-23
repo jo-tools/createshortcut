@@ -39,7 +39,7 @@ The Desktop application Xojo example project ```CreateShortcut.xojo_project``` i
 ### How to use in your own Xojo project?
 1. Copy and Paste the Module ```modShortcut``` to your project. Or just copy and paste the extends method ```CreateShortcut``` to one of your global Modules.
 2. You can then use it as an extension on a FolderItem:   
-    ```anInstanceOfFolderItem.CreateShortcut(saveShortcutFile As FolderItem, useLinuxIconFile As FolderItem = nil)```
+    ```anInstanceOfFolderItem.CreateShortcut(poShortcutFile As FolderItem, psLinuxDisplayname As String = "", poLinuxIconFile As FolderItem = nil)```
 
 ## About
 Juerg Otter is a long term user of Xojo and working for [CM Informatik AG](https://cmiag.ch/). Their Application [CMI LehrerOffice](https://cmi-bildung.ch/) is a Xojo Design Award Winner 2018. In his leisure time Juerg provides some [bits and pieces for Xojo Developers](https://www.jo-tools.ch/).
