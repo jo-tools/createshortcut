@@ -614,7 +614,7 @@ End
 		  #EndIf
 		  
 		  
-		  If oApp.CreateShortcut(fileShortcut, oLinuxIconFile) Then
+		  If oApp.CreateShortcut(fileShortcut, self.Title, oLinuxIconFile) Then
 		    Var sLinuxInfo As String
 		    #If TargetLinux Then
 		      sLinuxInfo = EndOfLine + EndOfLine + _

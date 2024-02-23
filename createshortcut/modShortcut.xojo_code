@@ -1,7 +1,7 @@
 #tag Module
 Protected Module modShortcut
 	#tag Method, Flags = &h0, CompatibilityFlags = (TargetDesktop and (Target32Bit or Target64Bit))
-		Function CreateShortcut(Extends poOrigin As FolderItem, poShortcutFile As FolderItem, poLinuxIconFile As FolderItem = nil) As Boolean
+		Function CreateShortcut(Extends poOrigin As FolderItem, poShortcutFile As FolderItem, psLinuxDisplayname As String = "", poLinuxIconFile As FolderItem = nil) As Boolean
 		  Try
 		    'Check Origin
 		    If (poOrigin = Nil) Then Return False
@@ -96,7 +96,7 @@ Protected Module modShortcut
 		        sIconFile = poLinuxIconFile.NativePath 'unescaped
 		      End If
 		      
-		      Var sName As String = poShortcutFile.Name
+		      Var sName As String = If(psLinuxDisplayname <> "", psLinuxDisplayname, poShortcutFile.Name)
 		      If (sName.RightBytes(8) = ".desktop") Then sName = sName.LeftBytes(sName.Bytes - 8) 'remove .desktop
 		      
 		      Var sContent As String = "[Desktop Entry]" + EndOfLine.UNIX + _
