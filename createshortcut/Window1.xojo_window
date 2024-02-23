@@ -25,17 +25,13 @@ Begin DesktopWindow Window1
    Visible         =   True
    Width           =   600
    Begin DesktopCanvas cnvAppIcon
-      AcceptFocus     =   "False"
-      AcceptTabs      =   "False"
       AllowAutoDeactivate=   True
       AllowFocus      =   False
       AllowFocusRing  =   True
       AllowTabs       =   False
-      AutoDeactivate  =   "True"
       Backdrop        =   0
       Enabled         =   True
       Height          =   64
-      HelpTag         =   "#constWebsiteUrl"
       Index           =   -2147483648
       InitialParent   =   ""
       Left            =   20
@@ -51,20 +47,17 @@ Begin DesktopWindow Window1
       Tooltip         =   ""
       Top             =   20
       Transparent     =   True
-      UseFocusRing    =   "True"
       Visible         =   True
       Width           =   64
    End
    Begin DesktopLabel labAppName
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   True
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   30
-      HelpTag         =   "#constWebsiteUrl"
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -81,12 +74,8 @@ Begin DesktopWindow Window1
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "AppName"
-      TextAlign       =   "2"
       TextAlignment   =   0
       TextColor       =   &c0072D800
-      TextFont        =   "System"
-      TextSize        =   "0.0"
-      TextUnit        =   "0"
       Tooltip         =   ""
       Top             =   20
       Transparent     =   True
@@ -96,14 +85,12 @@ Begin DesktopWindow Window1
    End
    Begin DesktopLabel labThanks
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   False
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   30
-      HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -120,12 +107,8 @@ Begin DesktopWindow Window1
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "Would you like to say 'Thank you'?"
-      TextAlign       =   "3"
       TextAlignment   =   0
       TextColor       =   &c66666600
-      TextFont        =   "SmallSystem"
-      TextSize        =   "0.0"
-      TextUnit        =   "0"
       Tooltip         =   ""
       Top             =   20
       Transparent     =   True
@@ -135,14 +118,12 @@ Begin DesktopWindow Window1
    End
    Begin DesktopLabel labAppVersion
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   False
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   30
-      HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -159,12 +140,8 @@ Begin DesktopWindow Window1
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "AppVersion"
-      TextAlign       =   "2"
       TextAlignment   =   0
       TextColor       =   &c00000000
-      TextFont        =   "System"
-      TextSize        =   "0.0"
-      TextUnit        =   "0"
       Tooltip         =   ""
       Top             =   54
       Transparent     =   True
@@ -174,14 +151,12 @@ Begin DesktopWindow Window1
    End
    Begin DesktopLabel labContact
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   False
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   30
-      HelpTag         =   "xojo@jo-tools.ch"
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -198,12 +173,8 @@ Begin DesktopWindow Window1
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "Contact"
-      TextAlign       =   "2"
       TextAlignment   =   0
       TextColor       =   &c0072CE00
-      TextFont        =   "System"
-      TextSize        =   "0.0"
-      TextUnit        =   "0"
       Tooltip         =   ""
       Top             =   54
       Transparent     =   True
@@ -212,17 +183,13 @@ Begin DesktopWindow Window1
       Width           =   70
    End
    Begin DesktopCanvas cnvPayPal
-      AcceptFocus     =   "False"
-      AcceptTabs      =   "False"
       AllowAutoDeactivate=   True
       AllowFocus      =   False
       AllowFocusRing  =   True
       AllowTabs       =   False
-      AutoDeactivate  =   "True"
       Backdrop        =   0
       Enabled         =   True
       Height          =   30
-      HelpTag         =   "https://paypal.me/jotools"
       Index           =   -2147483648
       InitialParent   =   ""
       Left            =   474
@@ -238,7 +205,6 @@ Begin DesktopWindow Window1
       Tooltip         =   ""
       Top             =   54
       Transparent     =   True
-      UseFocusRing    =   "True"
       Visible         =   True
       Width           =   106
    End
@@ -246,10 +212,8 @@ Begin DesktopWindow Window1
       Active          =   False
       AllowAutoDeactivate=   True
       AllowTabStop    =   True
-      AutoDeactivate  =   "True"
       Enabled         =   True
       Height          =   3
-      HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Left            =   0
@@ -274,9 +238,7 @@ Begin DesktopWindow Window1
    End
    Begin DesktopButton btnCreateShortcut
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   False
-      ButtonStyle     =   "0"
       Cancel          =   False
       Caption         =   "Create Shortcut"
       Default         =   False
@@ -285,7 +247,6 @@ Begin DesktopWindow Window1
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -300,9 +261,6 @@ Begin DesktopWindow Window1
       TabIndex        =   8
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   "0.0"
-      TextUnit        =   "0"
       Tooltip         =   ""
       Top             =   150
       Transparent     =   False
@@ -312,14 +270,12 @@ Begin DesktopWindow Window1
    End
    Begin DesktopLabel labInfo
       AllowAutoDeactivate=   True
-      AutoDeactivate  =   "True"
       Bold            =   False
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -336,12 +292,8 @@ Begin DesktopWindow Window1
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "This example will simply create a shortcut to this application."
-      TextAlign       =   "0"
       TextAlignment   =   0
       TextColor       =   &c00000000
-      TextFont        =   "System"
-      TextSize        =   "0.0"
-      TextUnit        =   "0"
       Tooltip         =   ""
       Top             =   115
       Transparent     =   False
@@ -585,7 +537,6 @@ End
 		  
 		  
 		  'Linux: The Desktop Launch Item needs an Icon
-		  '       Xojo adds some appicons next to the executable, so let's get that one
 		  Var oLinuxIconFile As FolderItem
 		  #If TargetLinux Then
 		    oLinuxIconFile = oApp.Parent
@@ -594,7 +545,7 @@ End
 		      oLinuxIconFile = oLinuxIconFile.Child("CreateShortcut.png")
 		    End If
 		    If (oLinuxIconFile = Nil) Or oLinuxIconFile.Directory Or (Not oLinuxIconFile.Exists) Then
-		      MessageBox "Icon file 'appicon_128.png' not found next to the application executable. Let's continue without icon."
+		      MessageBox "Icon file 'CreateShortcut.png' not found next to the application executable. Let's continue without icon."
 		    End If
 		  #EndIf
 		  
@@ -602,10 +553,23 @@ End
 		    MessageBox "Note: This is a Debug Run." + EndOfLine + EndOfLine + "The " + constOsCaptionShortcut + " you're going to create will point to the DebugBuild, which doesn't make much sense."
 		  #EndIf
 		  
+		  'Initial Folder: Desktop
+		  Var oSaveToFolderSuggestion As FolderItem = SpecialFolder.Desktop
+		  #If TargetLinux Then
+		    'On Linux: if "~/.local/share/applications/" exists, then suggest to save there
+		    'This will create a Launcher for the app integrated with the OS.
+		    'And if saved there, the icon in the side bar will show for the app.
+		    'Note: it is required that the filename of the '.desktop' file matches exactly (!) the executable
+		    Var oLinuxUserLocalSharedAppsFolder As FolderItem = GetLinuxUserLocalSharedAppsFolder()
+		    If (oLinuxUserLocalSharedAppsFolder <> Nil) And oLinuxUserLocalSharedAppsFolder.IsFolder Then
+		      oSaveToFolderSuggestion = oLinuxUserLocalSharedAppsFolder
+		    End If
+		  #EndIf
+		  
 		  
 		  'Ask the user where to save the Shortcut File
 		  Var dlg As New SaveFileDialog
-		  dlg.InitialFolder = SpecialFolder.Desktop
+		  dlg.InitialFolder = oSaveToFolderSuggestion
 		  dlg.Title = "Create " + constOsCaptionShortcut
 		  dlg.PromptText = "Create " + constOsCaptionShortcut + " for Application '" + constAppName + "'"
 		  
@@ -622,8 +586,17 @@ End
 		    filterFileType.Extensions = "desktop"
 		  #EndIf
 		  
-		  
-		  dlg.SuggestedFileName = "Launch My App" + If(filterFileType.Extensions <> "", "." + filterFileType.Extensions, "")
+		  Var sSuggestedFileName As String = "Launch My App"
+		  #If TargetLinux Then
+		    'On Linux: if "~/.local/share/applications/" exists, then suggest to save there
+		    'This will create a Launcher for the app integrated with the OS.
+		    'And if saved there, the icon in the side bar will show for the app.
+		    If (oLinuxUserLocalSharedAppsFolder <> Nil) And oLinuxUserLocalSharedAppsFolder.IsFolder Then
+		      'Note: it is required that the filename of the '.desktop' file matches exactly (!) the executable
+		      sSuggestedFileName = App.ExecutableFile.Name
+		    End If
+		  #EndIf
+		  dlg.SuggestedFileName = sSuggestedFileName + If(filterFileType.Extensions <> "", "." + filterFileType.Extensions, "")
 		  dlg.Filter = filterFileType
 		  Var fileShortcut As FolderItem = dlg.ShowModal
 		  
@@ -647,6 +620,11 @@ End
 		      sLinuxInfo = EndOfLine + EndOfLine + _
 		      "Note: Depending on the Linux Distribution you need to manually " + _
 		      "right click the created file and choose 'Allow Launching'."
+		      If (oLinuxUserLocalSharedAppsFolder <> Nil) And oLinuxUserLocalSharedAppsFolder.IsFolder Then
+		        sLinuxInfo = sLinuxInfo + EndOfLine + _
+		        "If saved to '~/.local/share/applications/' with filename matching the executable name " + _
+		        "you then should be able to launch the app using the application Launcher of the operating system."
+		      End If
 		    #EndIf
 		    MessageBox constOsCaptionShortcut + " successfully created." + sLinuxInfo
 		  Else
