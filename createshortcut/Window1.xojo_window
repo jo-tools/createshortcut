@@ -94,7 +94,7 @@ Begin DesktopWindow Window1
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   371
+      Left            =   315
       LockBottom      =   False
       LockedInPosition=   True
       LockLeft        =   False
@@ -107,14 +107,14 @@ Begin DesktopWindow Window1
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "Would you like to say 'Thank you'?"
-      TextAlignment   =   0
+      TextAlignment   =   3
       TextColor       =   &c66666600
       Tooltip         =   ""
       Top             =   20
       Transparent     =   True
       Underline       =   False
       Visible         =   True
-      Width           =   209
+      Width           =   265
    End
    Begin DesktopLabel labAppVersion
       AllowAutoDeactivate=   True
