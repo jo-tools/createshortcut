@@ -2,6 +2,10 @@
 Protected Module modShortcut
 	#tag Method, Flags = &h0, CompatibilityFlags = (TargetDesktop and (Target32Bit or Target64Bit))
 		Function CreateShortcut(Extends poOrigin As FolderItem, poShortcutFile As FolderItem, psLinuxDisplayname As String = "", poLinuxIconFile As FolderItem = nil) As Boolean
+		  #If TargetMacOS Or TargetWindows Then
+		    #Pragma unused psLinuxDisplayname
+		  #EndIf
+		  
 		  Try
 		    'Check Origin
 		    If (poOrigin = Nil) Then Return False

@@ -33,7 +33,7 @@ Linux: **Desktop Launch File** *(with Icon)*
 [Xojo](https://www.xojo.com/) is a rapid application development for Desktop, Web, Mobile & Raspberry Pi.  
 
 The Desktop application Xojo example project ```CreateShortcut.xojo_project``` is using:
-- Xojo 2023r4
+- Xojo 2024r4.2
 - API 2
 
 ### How to use in your own Xojo project?
